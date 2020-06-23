@@ -1,0 +1,45 @@
+body,
+section,
+main,
+h1,
+div,
+ul,
+li,
+p {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+body {
+  animation: colorChange 50s infinite;
+  font-family: 'Lucida Console', Courier, monospace;
+}
+
+@keyframes colorChange {
+  0% {
+    background: #4b3e3d;
+  }
+
+  25% {
+    background: #b9594a;
+  }
+
+  50% {
+    background: #648a99;
+  }
+
+  75% {
+    background: #8c8d86;
+  }
+
+  100% {
+    background: #ff402c;
+  }
+}
+
+section {
+  background-color: #f5f8f9;
+  border: 1px solid #c0bfbc;
+  border-radius: 8px;
+}
