@@ -43,13 +43,17 @@ export default {
     },
 
     async getSuperheroByAbilities(flying) {
-      const res = await axios.get(`${this.baseURL}?puedeVolar =${flying}`)
-      console.log('response by ID', res)
+      const res = await axios.get(`${this.baseURL}?puedeVolar=${flying}`)
+      console.log('response by Abilities', res)
     }
   },
 
   mounted() {
     this.getSuperheroList()
+
+    this.getSuperheroById(1)
+
+    this.getSuperheroByAbilities(true)
   }
 }
 </script>

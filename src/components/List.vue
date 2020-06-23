@@ -45,19 +45,19 @@ section {
   min-height: 300px;
 }
 
-header {
-  padding: 10px;
-  background-color: #eaeae8;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  border-bottom: 1px solid #c0bfbc;
+// header {
+//   padding: 10px;
+//   background-color: #eaeae8;
+//   border-top-left-radius: 8px;
+//   border-top-right-radius: 8px;
+//   border-bottom: 1px solid #c0bfbc;
 
-  h1 {
-    font-size: 20px;
-    font-weight: normal;
-    letter-spacing: -1px;
-  }
-}
+//   h1 {
+//     font-size: 20px;
+//     font-weight: normal;
+//     letter-spacing: -1px;
+//   }
+// }
 
 .hero {
   list-style: none;
