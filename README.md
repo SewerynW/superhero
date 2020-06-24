@@ -7,7 +7,7 @@
 ```bash
 
 # download project
-$ git clone https://github.com/SewerynW/Graph.git
+$ git clone https://github.com/SewerynW/superhero.git
 
 # install dependencies
 $ npm install
