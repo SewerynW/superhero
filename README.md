@@ -1,29 +1,25 @@
 # superhero
 
-## Project setup
+> Application for inteview.
 
+You can check it on: https://angry-meitner-98fabf.netlify.app/
+
+## Build Setup
+
+```bash
+
+# download project
+$ git clone https://github.com/SewerynW/superhero.git
+
+# install dependencies
+$ npm install
+
+# serve with hot reload at localhost:3000
+$ npm run dev
+
+# generate static project
+$ npm run generate
+
+# test
+$ npm run test
 ```
-npm install
-```
-
-### Compiles and hot-reloads for development
-
-```
-npm run dev
-```
-
-### Compiles and minifies for production
-
-```
-npm run build
-```
-
-### Lints and fixes files
-
-```
-npm run lint
-```
-
-### Customize configuration
-
-See [Configuration Reference](https://cli.vuejs.org/config/).
