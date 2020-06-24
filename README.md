@@ -1,6 +1,6 @@
 # superhero
 
-> Application for inteview.
+> Application for interview.
 
 ## Build Setup
 
