@@ -1,7 +1,19 @@
 <template>
   <div class="container">
-    <list :superheroList="finalList" />
-    <Panel />
+    <div v-if="showErrorInfo" class="errorInfo">
+      <p>
+        Something went wrong with fetching pictures.<br />
+        We change picture for default picture.
+      </p>
+      <button @click="showErrorInfo = false">close</button>
+    </div>
+
+    <list @showBox="showError" :superhero-list="filteredList" />
+    <Panel
+      @enteredId="updateId"
+      @pickedAbility="updateAbility"
+      @entereNickname="updateNickname"
+    />
   </div>
 </template>
 
@@ -21,40 +33,122 @@ export default {
   data() {
     return {
       baseURL: 'http://157.245.138.232:9091/api/v1/test/superheroes',
-      superheroList: []
+      heroList: [],
+      heroListById: [],
+      heroListByAblitiy: [],
+      selectedId: null,
+      selectedAbility: '',
+      selectedNickname: '',
+      showErrorInfo: false
     }
   },
 
   computed: {
-    finalList() {
-      return this.superheroList
+    mergedList() {
+      console.log('zmiana w computed ')
+      const list = [].concat(
+        this.heroList,
+        this.heroListById,
+        this.heroListByAblitiy
+      )
+
+      return list.reduce((acc, hero) => {
+        if (acc.some((checkedHero) => checkedHero.id === hero.id)) {
+          return acc
+        } else {
+          acc.push(hero)
+          return acc
+        }
+      }, [])
+    },
+
+    filteredList() {
+      return this.mergedList.filter((hero) => {
+        return hero.nombre
+          .toLowerCase()
+          .includes(this.selectedNickname.toLowerCase())
+      })
+    }
+  },
+
+  watch: {
+    selectedId(value) {
+      this.getSuperheroById(value)
+    },
+
+    selectedAbility(value) {
+      switch (value) {
+        case 'canFly':
+          this.heroList = []
+          this.getSuperheroByAbilities(true)
+          break
+        case 'canNotFly':
+          this.heroList = []
+          this.getSuperheroByAbilities(false)
+          break
+        case 'all':
+          this.getSuperheroList()
+          break
+        default:
+          break
+      }
+    },
+
+    selectedNickname(value) {
+      console.log('watch search', value)
     }
   },
   methods: {
+    showError() {
+      console.log('show error')
+      this.showErrorInfo = true
+    },
+
+    updateId(value) {
+      this.selectedId = value
+    },
+
+    updateAbility(value) {
+      this.selectedAbility = value
+    },
+
+    updateNickname(value) {
+      this.selectedNickname = value
+    },
+
     async getSuperheroList() {
-      const res = await axios.get(this.baseURL)
-      console.log('response ALL', res)
-      this.superheroList = res.data.data
+      try {
+        const response = await axios.get(this.baseURL)
+        this.heroList = response.data.data
+      } catch (er) {
+        console.error(er)
+        return
+      }
     },
 
     async getSuperheroById(id) {
-      const res = await axios.get(`${this.baseURL}/${id}`)
-      console.log('response by ID', res)
+      try {
+        const response = await axios.get(`${this.baseURL}/${id}`)
+        this.heroListById = response.data.data
+      } catch (er) {
+        this.heroListById = []
+        console.error(er)
+        return
+      }
     },
 
     async getSuperheroByAbilities(flying) {
-      const res = await axios.get(`${this.baseURL}?puedeVolar=${flying}`)
-      console.log('response by Abilities', res)
+      try {
+        const response = await axios.get(`${this.baseURL}?puedeVolar=${flying}`)
+        this.heroListByAblitiy = response.data.data
+      } catch (er) {
+        console.error(er)
+        return
+      }
     }
   },
 
-  mounted() {
-    this.getSuperheroList()
-
-    this.getSuperheroById(1)
-
-    this.getSuperheroByAbilities(true)
-  }
+  mounted() {}
 }
 </script>
 
@@ -64,5 +158,15 @@ export default {
   display: flex;
   justify-content: space-around;
   align-items: center;
+}
+
+.errorInfo {
+  position: absolute;
+  right: 50px;
+  top: 50px;
+  background-color: #f5f8f9;
+  border: 1px solid #c0bfbc;
+  border-radius: 8px;
+  padding: 12px;
 }
 </style>

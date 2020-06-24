@@ -5,15 +5,23 @@
     </header>
 
     <main>
-      <ul>
+      <ul v-if="superheroList.length > 0">
         <li class="hero" v-for="(hero, idx) in superheroList" :key="idx">
-          <img :src="hero.avatarURL" alt="Avatar" />
+          <img
+            :src="hero.avatarURL"
+            alt="Avatar"
+            @error="showError"
+            onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQmm3b5D-piofm2LtGv5BklaY1L_UbydLJJ6Q&usqp=CAU';"
+          />
           <div>
             <p class="hero--nickname">{{ hero.nombre }}</p>
             <p class="hero--real-name">{{ hero.nombreReal }}</p>
           </div>
         </li>
       </ul>
+      <div class="empty-info" v-if="superheroList.length === 0">
+        None of Superhero Match.
+      </div>
     </main>
   </section>
 </template>
@@ -30,12 +38,13 @@ export default {
   data() {
     return {}
   },
-  watch: {
-    superheroList(value) {
-      console.log('i get list', value)
+  methods: {
+    showError() {
+      console.log('error')
+      this.$emit('showBox')
+      // this.$$emit('imgError', value)
     }
-  },
-  mounted() {}
+  }
 }
 </script>
 
@@ -44,20 +53,11 @@ section {
   width: 400px;
   min-height: 300px;
 }
-
-// header {
-//   padding: 10px;
-//   background-color: #eaeae8;
-//   border-top-left-radius: 8px;
-//   border-top-right-radius: 8px;
-//   border-bottom: 1px solid #c0bfbc;
-
-//   h1 {
-//     font-size: 20px;
-//     font-weight: normal;
-//     letter-spacing: -1px;
-//   }
-// }
+.empty-info {
+  text-align: center;
+  padding: 12px;
+  width: 100%;
+}
 
 .hero {
   list-style: none;
