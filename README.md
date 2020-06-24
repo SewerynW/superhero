@@ -2,24 +2,22 @@
 
 > Application for inteview.
 
-You can check it on: https://angry-meitner-98fabf.netlify.app/
-
 ## Build Setup
 
 ```bash
 
 # download project
-$ git clone https://github.com/SewerynW/superhero.git
+$ git clone https://github.com/SewerynW/Graph.git
 
 # install dependencies
 $ npm install
 
-# serve with hot reload at localhost:3000
+# Compiles and hot-reloads for development
 $ npm run dev
 
-# generate static project
-$ npm run generate
+# Compiles and minifies for production
+$ npm run build
 
-# test
-$ npm run test
+# lints and fixes files
+$ npm run lint
 ```
