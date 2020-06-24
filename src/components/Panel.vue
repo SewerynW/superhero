@@ -73,16 +73,6 @@ export default {
     heroNickname(value) {
       this.$emit('entereNickname', value)
     }
-  },
-
-  methods: {
-    // cleanFilters() {
-    //   console.log('czysc')
-    // }
-  },
-
-  mounted() {
-    // console.log('propy', this.heroAbility)
   }
 }
 </script>

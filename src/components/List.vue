@@ -40,9 +40,7 @@ export default {
   },
   methods: {
     showError() {
-      console.log('error')
       this.$emit('showBox')
-      // this.$$emit('imgError', value)
     }
   }
 }

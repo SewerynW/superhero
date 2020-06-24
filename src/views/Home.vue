@@ -45,7 +45,6 @@ export default {
 
   computed: {
     mergedList() {
-      console.log('zmiana w computed ')
       const list = [].concat(
         this.heroList,
         this.heroListById,
@@ -92,15 +91,10 @@ export default {
         default:
           break
       }
-    },
-
-    selectedNickname(value) {
-      console.log('watch search', value)
     }
   },
   methods: {
     showError() {
-      console.log('show error')
       this.showErrorInfo = true
     },
 
